@@ -1,12 +1,10 @@
-import React from 'react';
-import './TableCompanies.css';
+import React, { Component } from "react";
+import './TableOfCompanies.css';
 
-function App() {
-  return (
-    <div className="App">
-      
-    </div>
-  );
+class TableOfCompanies extends Component {
+  render(){
+            return (<div className="TableOfCompanies">test</div>);
+          }
 }
 
-export default App;
+export default TableOfCompanies;
