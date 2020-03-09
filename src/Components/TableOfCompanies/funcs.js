@@ -26,6 +26,7 @@ async function getAllReadyCompanies(){
         companie.sum = res.sum.toFixed(2);
         companie.avg = res.avg.toFixed(2);
     })
+    return companies;
 }
 
 module.exports ={
