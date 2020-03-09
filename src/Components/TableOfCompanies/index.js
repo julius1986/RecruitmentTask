@@ -9,20 +9,18 @@ class TableOfCompanies extends Component {
   }
   async componentDidMount(){
     let companies = await getAllReadyCompanies();
-    this.setState({...this.state, companies})
-    console.log(this.state);
-       
+    this.setState({...this.state, companies});       
   }
 
   render(){
     let rows = null;
     let companies = this.state.companies; 
     if(companies.length>0){                        
-      rows = this.state.companies.map(companie => {                        
-        return <TableRow key={companie.id} companie={companie} />;                        
+      rows = this.state.companies.map(company => {                        
+        return <TableRow key={company.id} company={company} />;                        
       });
     }
-    return (<div className="TableOfCompanies">
+    return (<div className="table-of-companies">
       {rows}
     </div>);
   }
