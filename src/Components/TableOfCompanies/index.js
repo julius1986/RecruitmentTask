@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import './TableOfCompanies.css';
 import { getAllReadyCompanies } from "./funcs";
 import TableRow from "../TableRow"
+import TableHeader from "../TableHeader";
+
 
 class TableOfCompanies extends Component {
   state = {
@@ -20,9 +22,12 @@ class TableOfCompanies extends Component {
         return <TableRow key={company.id} company={company} />;                        
       });
     }
-    return (<div className="table-of-companies">
-      {rows}
-    </div>);
+    return (
+      <div className="table-of-companies">
+        <TableHeader/>
+        {rows}
+      </div>
+    );
   }
 }
 

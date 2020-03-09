@@ -1,3 +1,7 @@
+.table-header {
+  display: flex;
+}
+
 .table-row {
   display: flex;
 }
