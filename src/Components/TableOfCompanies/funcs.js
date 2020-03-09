@@ -7,26 +7,27 @@ function sumAndAvgIncome(incomes) {
 }
 
 async function fetchCompanies(){
-    let result = fetch(COMPANIES)
+    let result = await fetch(COMPANIES)
     result = (await result).json()
     return result;
 }
 
 async function fetchIncomesById(id){
-    let result = fetch(INCOME+id);
-    result = (await result).json();
+    let result = await fetch(INCOME+id);
+    result = await result.json();
     return result;    
 }
 
 async function getAllReadyCompanies(){
     let companies = await fetchCompanies();
-    companies.forEach(async (companie) =>{
-        let incomeOfCompanie = await fetchIncomesById(companie.id); 
-        let res = await sumAndAvgIncome(incomeOfCompanie.incomes);
-        companie.sum = res.sum.toFixed(2);
-        companie.avg = res.avg.toFixed(2);
-    })
-    return companies;
+    companies = await Promise.all(companies.map(async (company) =>{
+        let incomeOfCompanie = await fetchIncomesById(company.id); 
+        let res = sumAndAvgIncome(incomeOfCompanie.incomes);
+        company.sum = res.sum.toFixed(2);
+        company.avg = res.avg.toFixed(2);
+        return company
+    }))
+    return companies
 }
 
 module.exports ={
