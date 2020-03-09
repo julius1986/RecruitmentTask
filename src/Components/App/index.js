@@ -1,5 +1,5 @@
 import React from "react";
-import TableOfCompanies from "../TableOfCompanies/index"
+import TableOfCompanies from "../TableOfCompanies/TableOfCompanies"
 
 export default function App() {
   return <div>
