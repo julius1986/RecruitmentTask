@@ -35,6 +35,36 @@ function lastMonthIncome(incomeOfCompanie) {
   return Number(sumPerLastMonth.toFixed(2));
 }
 
+function sortArrayByField(arr, fieldName, sortWay) {
+  if (!arr || !fieldName || !sortWay) return null;
+  if (!Array.isArray(arr)) return null;
+  if (arr.length < 1 || sortWay !== "ASC" || sortWay !== "DESC")
+    return null;
+  if (sortWay === "ASC") {
+    return arr
+      .map(el => {
+        return el;
+      })
+      .sort((item1, item2) => {
+        if (item1[fieldName] < item2[fieldName]) return -1;
+        if (item1[fieldName] > item2[fieldName]) return 1;
+        return 0;
+      });
+  } else if (sortWay === "DESC") {
+    return arr
+      .map(el => {
+        return el;
+      })
+      .sort((item1, item2) => {
+        if (item1[fieldName] < item2[fieldName]) return 1;
+        if (item1[fieldName] > item2[fieldName]) return -1;
+        return 0;
+      });
+  } else {
+    return arr;
+  }
+}
+
 
 async function fetchCompanies(){
     let result = await fetch(COMPANIES)
@@ -61,6 +91,7 @@ async function getAllReadyCompanies(){
     return companies
 }
 
-module.exports ={
-    getAllReadyCompanies
-}
+module.exports = {
+  getAllReadyCompanies,
+  sortArrayByField
+};
