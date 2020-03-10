@@ -6,6 +6,36 @@ function sumAndAvgIncome(incomes) {
     return {sum: sum, avg: sum/incomes.length}
 }
 
+function lastMonthIncome(incomeOfCompanie) {
+  if (!incomeOfCompanie) return 0;
+  if (!Array.isArray(incomeOfCompanie)) return 0;
+  if (incomeOfCompanie.length < 1) return 0;
+  let lastDate = 0;
+  incomeOfCompanie.forEach(income => {
+    if (lastDate < Number(new Date(income.date))) {
+      lastDate = Number(new Date(income.date));
+    }
+  });
+  lastDate = new Date(lastDate);
+  let lastMonth = lastDate.getMonth() + 1;
+  let year = lastDate.getFullYear();
+  let searchMonthAndYaer = { lastMonth, year };
+  let sumPerLastMonth = 0;
+  incomeOfCompanie.forEach(el => {
+    let elDate = new Date(el.date);
+    let elMonth = elDate.getMonth() + 1;
+    let elYear = elDate.getFullYear();
+    if (
+      elMonth === searchMonthAndYaer.lastMonth &&
+      elYear === searchMonthAndYaer.year
+    ) {
+      sumPerLastMonth += Number(el.value);
+    }
+  });
+  return Number(sumPerLastMonth.toFixed(2));
+}
+
+
 async function fetchCompanies(){
     let result = await fetch(COMPANIES)
     result = (await result).json()
