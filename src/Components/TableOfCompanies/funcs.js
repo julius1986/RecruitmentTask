@@ -38,7 +38,7 @@ function lastMonthIncome(incomeOfCompanie) {
 function sortArrayByField(arr, fieldName, sortWay) {
   if (!arr || !fieldName || !sortWay) return null;
   if (!Array.isArray(arr)) return null;
-  if (arr.length < 1 || sortWay !== "ASC" || sortWay !== "DESC")
+  if (arr.length < 1 && (sortWay !== "ASC" || sortWay !== "DESC"))
     return null;
   if (sortWay === "ASC") {
     return arr

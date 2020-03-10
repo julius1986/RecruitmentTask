@@ -13,7 +13,7 @@ class TableOfCompanies extends Component {
     minPage:1, 
     maxPage:1,
     currentSortField:null,
-    currentSort:null
+    sortWay:null
   }
   async componentDidMount(){
     let companies = await getAllReadyCompanies();
@@ -42,10 +42,30 @@ class TableOfCompanies extends Component {
   }
 
   sortBy = (e) => {    
-    let sortField = e.target.getAttribute("data-field-name");
+    let sortField = e.target.getAttribute("data-field-name");    
     if(this.state.currentSortField){
+        if (this.state.sortWay === "ASC") {
+          this.setState({
+            ...this.state, 
+            companies: sortArrayByField(this.state.companies, sortField, "DESC"),
+            sortWay: "DESC",
+            currentSortField: sortField
+          })
+        } else {
+          this.setState({
+            ...this.state,
+            companies: sortArrayByField(this.state.companies, sortField, "ASC"),
+            sortWay: "ASC",
+            currentSortField: sortField
+          });         
+        }
     }else{
-      this.setState({...this.state,})
+          this.setState({
+            ...this.state,
+            companies: sortArrayByField(this.state.companies, sortField, "ASC"),
+            sortWay: "ASC",
+            currentSortField: sortField
+          });       
     }
     
 
