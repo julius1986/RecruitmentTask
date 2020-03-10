@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import './TableOfCompanies.css';
-import { getAllReadyCompanies } from "./funcs";
+import { getAllReadyCompanies, sortArrayByField } from "./funcs";
 import TableRow from "../TableRow"
 import TableHeader from "../TableHeader";
 
@@ -11,7 +11,9 @@ class TableOfCompanies extends Component {
     companiesOnPage:20, 
     currentPage:1, 
     minPage:1, 
-    maxPage:1
+    maxPage:1,
+    currentSortField:null,
+    currentSort:null
   }
   async componentDidMount(){
     let companies = await getAllReadyCompanies();
@@ -39,6 +41,16 @@ class TableOfCompanies extends Component {
     }
   }
 
+  sortBy = (e) => {    
+    let sortField = e.target.getAttribute("data-field-name");
+    if(this.state.currentSortField){
+    }else{
+      this.setState({...this.state,})
+    }
+    
+
+  }
+
   render(){
     let rows = null;
     let from = this.state.currentPage * this.state.companiesOnPage - this.state.companiesOnPage;
@@ -51,7 +63,7 @@ class TableOfCompanies extends Component {
     }
     return (
       <div className="table-of-companies">
-        <TableHeader/>
+        <TableHeader sort={this.sortBy}/>
         {rows}
         <button onClick={this.prevPage}>prev</button><button onClick={this.nextPage}>next</button>
       </div>
