@@ -21,10 +21,11 @@ async function fetchIncomesById(id){
 async function getAllReadyCompanies(){
     let companies = await fetchCompanies();
     companies = await Promise.all(companies.map(async (company) =>{
-        let incomeOfCompanie = await fetchIncomesById(company.id); 
-        let res = sumAndAvgIncome(incomeOfCompanie.incomes);
+        let incomeOfCompany = await fetchIncomesById(company.id); 
+        let res = sumAndAvgIncome(incomeOfCompany.incomes);
         company.sum = res.sum.toFixed(2);
         company.avg = res.avg.toFixed(2);
+        company.lastMonthIncome = lastMonthIncome(incomeOfCompany.incomes);
         return company
     }))
     return companies
