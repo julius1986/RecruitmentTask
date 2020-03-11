@@ -40,6 +40,9 @@ class TableOfCompanies extends Component {
         currentPage: 1
       });
     }
+    if(value===""){
+      this.setState({...this.state, companies:[...this.state.originCompanies]})
+    }
   };
 
   nextPage = () => {
