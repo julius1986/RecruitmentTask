@@ -65,6 +65,21 @@ function sortArrayByField(arr, fieldName, sortWay) {
   }
 }
 
+function filterBy(arr, value) {
+  if (!value) return null;
+  if (!Array.isArray(arr)) return null;
+  if (arr.length < 1) return null;
+  let result = arr.filter(el => {
+    for (let key in el) {
+      console.log(el[key], el[key].toString().includes(value));
+      if (el[key].toString().includes(value)) {
+        return true;
+      }
+    }
+    return false;
+  });
+  return result;
+}
 
 async function fetchCompanies(){
     let result = await fetch(COMPANIES)
@@ -93,5 +108,6 @@ async function getAllReadyCompanies(){
 
 module.exports = {
   getAllReadyCompanies,
-  sortArrayByField
+  sortArrayByField,
+  filterBy
 };
