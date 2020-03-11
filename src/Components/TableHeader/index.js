@@ -5,46 +5,46 @@ export default function TableHeader(props){
     return (
       <div className="table-header">
         <div
-          className="table-cell cell-1 md-1"
+          className="flex-1"
           onClick={sort}
           data-field-name="id"
         >
           Id
         </div>
         <div
-          className="table-cell cell-2 md-2"
+          className="flex-3"
           onClick={sort}
           data-field-name="name"
         >
           Name
         </div>
         <div
-          className="table-cell cell-3 md-2"
+          className="flex-3"
           onClick={sort}
           data-field-name="city"
         >
           City
         </div>
         <div
-          className="table-cell cell-4 md-1"
+          className="flex-2"
           onClick={sort}
           data-field-name="sum"
         >
-          total income
+          total
         </div>
         <div
-          className="table-cell cell-5 md-1"
+          className="flex-2"
           onClick={sort}
           data-field-name="avg"
         >
-          average income
+          average
         </div>
         <div
-          className="table-cell cell-6 md-1"
+          className="flex-2"
           onClick={sort}
           data-field-name="lastMonthIncome"
         >
-          last month income
+          last month
         </div>
       </div>
     );

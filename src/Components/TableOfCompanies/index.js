@@ -33,6 +33,7 @@ class TableOfCompanies extends Component {
     let companies = filterBy(this.state.originCompanies, value);
     if (companies) {
       let maxPage = Math.round(companies.length / 20);
+      if(maxPage===0) {maxPage = 1}
       this.setState({
         ...this.state,
         companies,
@@ -104,10 +105,13 @@ class TableOfCompanies extends Component {
     return (
       <div className="table-of-companies">
         <TableHeader sort={this.sortBy} />
-        {rows}
-        <button onClick={this.prevPage}>prev</button>
-        <button onClick={this.nextPage}>next</button>
-        <input onChange={this.inputHandle}></input>
+        <div className="table-body">{rows}</div>
+        <div className="table-footer">
+          <button onClick={this.prevPage}>prev</button>
+           {this.state.minPage}/{this.state.maxPage} current: {this.state.currentPage} 
+          <button onClick={this.nextPage}>next</button>
+          <input onChange={this.inputHandle}></input>
+        </div>
       </div>
     );
   }
