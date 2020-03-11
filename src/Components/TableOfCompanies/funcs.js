@@ -71,7 +71,6 @@ function filterBy(arr, value) {
   if (arr.length < 1) return null;
   let result = arr.filter(el => {
     for (let key in el) {
-      console.log(el[key], el[key].toString().includes(value));
       if (el[key].toString().includes(value)) {
         return true;
       }
