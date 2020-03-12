@@ -4,6 +4,7 @@ import { getAllReadyCompanies, sortArrayByField, filterBy } from "./funcs";
 import TableHeader from "../TableHeader";
 import TableFooter from "../TableFooter";
 import TableBody from "../TableBody";
+import { COMPANIES_URL, INCOME_URL } from "./const";
 
 class TableOfCompanies extends Component {
   state = {
@@ -18,7 +19,7 @@ class TableOfCompanies extends Component {
     filterBy: null
   };
   async componentDidMount() {
-    let originCompanies = await getAllReadyCompanies();
+    let originCompanies = await getAllReadyCompanies(COMPANIES_URL, INCOME_URL);
     let companies = [...originCompanies];
     let maxPage = Math.round(companies.length / 20);
     this.setState({

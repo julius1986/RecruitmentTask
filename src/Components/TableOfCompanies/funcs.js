@@ -1,17 +1,25 @@
-const COMPANIES = " https://recruitment.hal.skygate.io/companies";
-const INCOME = "https://recruitment.hal.skygate.io/incomes/";
-
+/**
+ * Calculate total sum and avg income
+ * @function sumAndAvgIncome
+ * @param {Array<{income:value}>} incomes - array of objects [{income:value}, ...]
+ * @return {Object} {sum: Number, avg: Number}
+ */
 function sumAndAvgIncome(incomes) {
   let sum = incomes.reduce((sum, income) => sum + Number(income.value), 0);
   return { sum: sum, avg: sum / incomes.length };
 }
 
-function lastMonthIncome(incomeOfCompanie) {
-  if (!incomeOfCompanie) return 0;
-  if (!Array.isArray(incomeOfCompanie)) return 0;
-  if (incomeOfCompanie.length < 1) return 0;
+/**
+ * Method calculates income by last month.
+ * @param {Array} incomeOfCompanie - list of incomes a company
+ * @return {number} total incomes by last month
+ */
+function getLastMonthIncome(incomeOfCompany) {
+  if (!incomeOfCompany) return 0;
+  if (!Array.isArray(incomeOfCompany)) return 0;
+  if (incomeOfCompany.length < 1) return 0;
   let lastDate = 0;
-  incomeOfCompanie.forEach(income => {
+  incomeOfCompany.forEach(income => {
     if (lastDate < Number(new Date(income.date))) {
       lastDate = Number(new Date(income.date));
     }
@@ -21,7 +29,7 @@ function lastMonthIncome(incomeOfCompanie) {
   let year = lastDate.getFullYear();
   let searchMonthAndYaer = { lastMonth, year };
   let sumPerLastMonth = 0;
-  incomeOfCompanie.forEach(el => {
+  incomeOfCompany.forEach(el => {
     let elDate = new Date(el.date);
     let elMonth = elDate.getMonth() + 1;
     let elYear = elDate.getFullYear();
@@ -34,7 +42,13 @@ function lastMonthIncome(incomeOfCompanie) {
   });
   return Number(sumPerLastMonth.toFixed(2));
 }
-
+/**
+ * Function creates new copy of array and sorts by the way ASC or DESC.
+ * @param {Array} arr - array of objects for sort
+ * @param {string} fieldName - name of object field
+ * @param {string} sortWay - ASC or DESC
+ * @return {Array} new sorted array.
+ */
 function sortArrayByField(arr, fieldName, sortWay) {
   if (!arr || !fieldName || !sortWay) return null;
   if (!Array.isArray(arr)) return null;
@@ -63,7 +77,12 @@ function sortArrayByField(arr, fieldName, sortWay) {
     return arr;
   }
 }
-
+/**
+ * Filters array of object by all fields.
+ * @param {Array} arr - array of objects
+ * @param {string} value - value for filter
+ * @returns {Array} return new filtered array
+ */
 function filterBy(arr, value) {
   if (!value) return null;
   if (!Array.isArray(arr)) return null;
@@ -78,28 +97,42 @@ function filterBy(arr, value) {
   });
   return result;
 }
-
-async function fetchCompanies() {
-  let result = await fetch(COMPANIES);
+/**
+ * Function fetch all companies
+ * @param {string} companiesUrl api url for fetching companies  
+ * @return {Promise<Array<{id:number, name:string, city:string}>>} return list of companies from url
+ */
+async function fetchCompanies(companiesUrl) {
+  let result = await fetch(companiesUrl);
   result = (await result).json();
   return result;
 }
-
-async function fetchIncomesById(id) {
-  let result = await fetch(INCOME + id);
+/**
+ * Fetch imcomes by id.
+ * @param {number} id id of company
+ * @param {string} incomeUrl api url to fetch data of company
+ * @return {Array<{income: number, date: date}>} array of objects with income and date
+ */
+async function fetchIncomesById(id, incomeUrl) {
+  let result = await fetch(incomeUrl + id);
   result = await result.json();
   return result;
 }
-
-async function getAllReadyCompanies() {
-  let companies = await fetchCompanies();
+/**
+ * Creates ready array of companies. 
+ * @param {string} companiesUrl api url for fetching companies  
+ * @param {string} incomeUrl api url to fetch data of company
+ * @return {Array<{id:number, name:string, city:string, sum: number, avg: number, lastMonthIncome: number}>} array of companies
+ */
+async function getAllReadyCompanies(companiesUrl, incomeUrl) {
+  let companies = await fetchCompanies(companiesUrl);
   companies = await Promise.all(
     companies.map(async company => {
-      let incomeOfCompany = await fetchIncomesById(company.id);
+      let incomeOfCompany = await fetchIncomesById(company.id, incomeUrl);
       let res = sumAndAvgIncome(incomeOfCompany.incomes);
       company.sum = res.sum.toFixed(2);
       company.avg = res.avg.toFixed(2);
-      company.lastMonthIncome = lastMonthIncome(incomeOfCompany.incomes);
+      company.lastMonthIncome = getLastMonthIncome(incomeOfCompany.incomes);
       return company;
     })
   );
