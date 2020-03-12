@@ -1,7 +1,11 @@
 .table-of-companies .table-row {
-    display: flex;
+  display: flex;
+}
+
+.table-of-companies .table-row .cell {
+  padding: 2px 0;
 }
 
 .table-of-companies .table-row:nth-child(2n) {
-    background-color: lightblue;
+  background-color: lightblue;
 }

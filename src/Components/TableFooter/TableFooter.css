@@ -1,0 +1,38 @@
+.table-of-companies .table-footer {
+  display: flex;
+  border-top: 1px solid black;
+  margin-top: 4px;
+}
+
+.table-of-companies .table-footer .pagination-group {
+  display: flex;
+  padding: 5px 0;
+}
+
+.table-of-companies .table-footer .btn {
+  border: 1px solid black;
+  border-radius: 12px;
+  padding: 4px 16px;
+}
+
+.table-of-companies .table-footer .curren-page {
+  padding: 4px 16px;
+}
+
+.table-of-companies .table-footer .filter-group {
+  padding: 9px 16px;
+}
+
+@media screen and (min-width: 640px) {
+  .table-of-companies .table-footer .btn:hover {
+    color: white;
+    border: 1px solid white;
+    background-color: black;
+  }
+
+  .table-of-companies .table-footer .btn:active {
+    border: 1px solid black;
+    color: black;
+    background-color: white;
+  }
+}

@@ -1,9 +1,9 @@
-.table-of-companies{
+.table-of-companies {
   min-width: 800px;
 }
 
-.flex-1{
-  flex:1;
+.flex-1 {
+  flex: 1;
 }
 
 .flex-2 {
@@ -25,4 +25,3 @@
 .flex-6 {
   flex: 6;
 }
-

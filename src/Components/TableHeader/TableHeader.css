@@ -1,10 +1,10 @@
 .table-of-companies .table-header {
-    display: flex;
+  display: flex;
 }
 
 .table-of-companies .table-header {
-    align-items: center;
-    height: 50px;
-    border-bottom: 1px black solid;
-    font-size: 1.5rem;
+  align-items: center;
+  height: 50px;
+  border-bottom: 1px black solid;
+  font-size: 1.5rem;
 }

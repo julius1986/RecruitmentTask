@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import "./TableOfCompanies.css";
 import { getAllReadyCompanies, sortArrayByField, filterBy } from "./funcs";
-import TableRow from "../TableRow";
 import TableHeader from "../TableHeader";
+import TableFooter from "../TableFooter";
+import TableBody from "../TableBody";
 
 class TableOfCompanies extends Component {
   state = {
@@ -29,16 +30,18 @@ class TableOfCompanies extends Component {
   }
 
   inputHandle = e => {
-    let { value } = e.target;    
+    let { value } = e.target;
     let companies;
     if (value === "") {
       companies = [...this.state.originCompanies];
-    }else{
+    } else {
       companies = filterBy(this.state.originCompanies, value);
     }
-    if (companies) {      
+    if (companies) {
       let maxPage = Math.round(companies.length / 20);
-      if(maxPage===0) {maxPage = 1}
+      if (maxPage === 0) {
+        maxPage = 1;
+      }
       this.setState({
         ...this.state,
         companies,
@@ -93,27 +96,17 @@ class TableOfCompanies extends Component {
   };
 
   render() {
-    let rows = null;
-    let from =
-      this.state.currentPage * this.state.companiesOnPage -
-      this.state.companiesOnPage;
-    let to = this.state.currentPage * this.state.companiesOnPage;
-    let companies = this.state.companies.slice(from, to);
-    if (companies.length > 0) {
-      rows = companies.map(company => {
-        return <TableRow key={company.id} company={company} />;
-      });
-    }
     return (
       <div className="table-of-companies">
         <TableHeader sort={this.sortBy} />
-        <div className="table-body">{rows}</div>
-        <div className="table-footer">
-          <button onClick={this.prevPage}>prev</button>
-          {this.state.currentPage}/{this.state.maxPage}
-          <button onClick={this.nextPage}>next</button>
-          <input onChange={this.inputHandle}></input>
-        </div>
+        <TableBody state={this.state} />
+        <TableFooter
+          prevPage={this.prevPage}
+          maxPage={this.state.maxPage}
+          currentPage={this.state.currentPage}
+          nextPage={this.nextPage}
+          inputHandle={this.inputHandle}
+        />
       </div>
     );
   }
