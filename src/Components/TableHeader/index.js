@@ -1,4 +1,5 @@
 import React from 'react'
+import "./TableHeader.css"
 
 export default function TableHeader(props){
     let {sort} = props;

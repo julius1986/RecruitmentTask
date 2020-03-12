@@ -1,0 +1,7 @@
+.table-of-companies .table-row {
+    display: flex;
+}
+
+.table-of-companies .table-row:nth-child(2n) {
+    background-color: lightblue;
+}

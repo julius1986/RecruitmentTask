@@ -2,18 +2,6 @@
   min-width: 800px;
 }
 
-.table-header {
-  display: flex;
-}
-
-.table-row {
-  display: flex;
-}
-
-.table-row:nth-child(2n) {
-  background-color: lightblue;
-}
-
 .flex-1{
   flex:1;
 }
@@ -36,21 +24,5 @@
 
 .flex-6 {
   flex: 6;
-}
-
-@media screen and (min-width:0px){
-
-.table-header{
-  align-items: center;
-  height: 50px;
-  border-bottom: 1px black solid;
-  font-size: 1.5rem;
-}
-
-
-}
-
-@media screen and (min-width:640px){
-
 }
 
