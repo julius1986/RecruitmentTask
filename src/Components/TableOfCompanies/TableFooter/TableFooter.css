@@ -1,15 +1,14 @@
 .table-of-companies .table-footer {
-  display: flex;
   border-top: 1px solid black;
   margin-top: 4px;
 }
 
 .table-of-companies .table-footer .pagination-group {
-  display: flex;
   padding: 5px 0;
 }
 
 .table-of-companies .table-footer .btn {
+  display: inline-block;
   border: 1px solid black;
   border-radius: 12px;
   padding: 4px 16px;
@@ -17,6 +16,7 @@
 
 .table-of-companies .table-footer .curren-page {
   padding: 4px 16px;
+  display: inline-block;
 }
 
 .table-of-companies .table-footer .filter-group {

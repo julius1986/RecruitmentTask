@@ -17,12 +17,12 @@ function TableRow(props) {
   let { id, name, city, sum, avg, lastMonthIncome } = props;
   return (
     <div className="table-row">
-      <div className="cell flex-1">{id}</div>
-      <div className="cell flex-5">{name}</div>
-      <div className="cell flex-4">{city}</div>
-      <div className="cell flex-2">{sum}</div>
-      <div className="cell flex-2">{avg}</div>
-      <div className="cell flex-2">{lastMonthIncome}</div>
+      <div className="cell sm-1">{id}</div>
+      <div className="cell sm-3">{name}</div>
+      <div className="cell sm-2">{city}</div>
+      <div className="cell sm-2">{sum}</div>
+      <div className="cell sm-2">{avg}</div>
+      <div className="cell sm-2">{lastMonthIncome}</div>
     </div>
   );
 }

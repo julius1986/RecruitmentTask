@@ -18,7 +18,7 @@ function TableFooter(props) {
   let { currentPage, maxPage, prevPage, nextPage, inputHandle } = props;
   return (
     <div className="table-footer">
-      <div className="pagination-group">
+      <div className="pagination-group sm-3">
         <div className="btn" onClick={prevPage}>
           prev
         </div>
@@ -29,7 +29,7 @@ function TableFooter(props) {
           next
         </div>
       </div>
-      <div className="filter-group">
+      <div className="filter-group sm-4">
         Fillter:{" "}
         <input onChange={inputHandle} placeholder="filter all columns"></input>
       </div>
