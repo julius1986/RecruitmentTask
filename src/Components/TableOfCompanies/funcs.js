@@ -99,7 +99,7 @@ function filterBy(arr, value) {
 }
 /**
  * Function fetch all companies
- * @param {string} companiesUrl api url for fetching companies  
+ * @param {string} companiesUrl api url for fetching companies
  * @return {Promise<Array<{id:number, name:string, city:string}>>} return list of companies from url
  */
 async function fetchCompanies(companiesUrl) {
@@ -119,8 +119,8 @@ async function fetchIncomesById(id, incomeUrl) {
   return result;
 }
 /**
- * Creates ready array of companies. 
- * @param {string} companiesUrl api url for fetching companies  
+ * Creates ready array of companies.
+ * @param {string} companiesUrl api url for fetching companies
  * @param {string} incomeUrl api url to fetch data of company
  * @return {Array<{id:number, name:string, city:string, sum: number, avg: number, lastMonthIncome: number}>} array of companies
  */
@@ -130,8 +130,8 @@ async function getAllReadyCompanies(companiesUrl, incomeUrl) {
     companies.map(async company => {
       let incomeOfCompany = await fetchIncomesById(company.id, incomeUrl);
       let res = sumAndAvgIncome(incomeOfCompany.incomes);
-      company.sum = res.sum.toFixed(2);
-      company.avg = res.avg.toFixed(2);
+      company.sum = Number(res.sum.toFixed(2));
+      company.avg = Number(res.avg.toFixed(2));
       company.lastMonthIncome = getLastMonthIncome(incomeOfCompany.incomes);
       return company;
     })

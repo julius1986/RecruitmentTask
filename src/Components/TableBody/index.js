@@ -1,6 +1,7 @@
 import React from "react";
 import TableRow from "../TableRow";
 import "./TableBody.css";
+import PropTypes from "prop-types";
 
 export default function TableBody(props) {
   let { currentPage, companiesOnPage, companies } = props.state;
@@ -16,3 +17,20 @@ export default function TableBody(props) {
 
   return <div className="table-body">{rows}</div>;
 }
+
+TableBody.propTypes = {
+  state: PropTypes.shape({
+    currentPage: PropTypes.number,
+    companiesOnPage: PropTypes.number,
+    companies: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+        city: PropTypes.string,
+        sum: PropTypes.number,
+        avg: PropTypes.number,
+        lastMonthIncome: PropTypes.number
+      })
+    )
+  })
+};

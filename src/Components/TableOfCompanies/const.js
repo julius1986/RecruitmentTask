@@ -12,6 +12,6 @@ const COMPANIES_URL = " https://recruitment.hal.skygate.io/companies";
 const INCOME_URL = "https://recruitment.hal.skygate.io/incomes/";
 
 module.exports = {
-    COMPANIES_URL,
-    INCOME_URL
-}
+  COMPANIES_URL,
+  INCOME_URL
+};

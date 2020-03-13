@@ -1,5 +1,6 @@
 import React from "react";
 import "./TableRow.css";
+import PropTypes from "prop-types";
 
 export default function TableRow(props) {
   let { company } = props;
@@ -14,3 +15,14 @@ export default function TableRow(props) {
     </div>
   );
 }
+
+TableRow.propTypes = {
+  company: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    city: PropTypes.string,
+    sum: PropTypes.number,
+    avg: PropTypes.number,
+    lastMonthIncome: PropTypes.number
+  })
+};

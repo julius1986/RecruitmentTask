@@ -1,5 +1,6 @@
 import React from "react";
 import "./TableHeader.css";
+import PropTypes from "prop-types";
 
 export default function TableHeader(props) {
   let { sort } = props;
@@ -26,3 +27,7 @@ export default function TableHeader(props) {
     </div>
   );
 }
+
+TableHeader.propTypes = {
+  sort: PropTypes.func
+};
