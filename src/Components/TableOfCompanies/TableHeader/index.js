@@ -1,8 +1,13 @@
 import React from "react";
 import "./TableHeader.css";
 import PropTypes from "prop-types";
-
-export default function TableHeader(props) {
+/**
+ * Table header component.
+ * @component
+ * @param {Object} props
+ * @property {function} sort
+ */
+function TableHeader(props) {
   let { sort } = props;
   return (
     <div className="table-header">
@@ -31,3 +36,5 @@ export default function TableHeader(props) {
 TableHeader.propTypes = {
   sort: PropTypes.func
 };
+
+export default TableHeader;

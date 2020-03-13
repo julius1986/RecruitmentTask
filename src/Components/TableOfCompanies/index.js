@@ -1,11 +1,29 @@
 import React, { Component } from "react";
 import "./TableOfCompanies.css";
 import { getAllReadyCompanies, sortArrayByField, filterBy } from "./funcs";
-import TableHeader from "../TableHeader";
-import TableFooter from "../TableFooter";
-import TableBody from "../TableBody";
-import { COMPANIES_URL, INCOME_URL } from "./const";
+import TableHeader from "./TableHeader";
+import TableFooter from "./TableFooter";
+import TableBody from "./TableBody";
+import {
+  COMPANIES_URL,
+  INCOME_URL,
+  SORT_WAY_ASC,
+  SORT_WAY_DESC
+} from "./const";
 
+/**
+ * Main component of table.
+ * @component
+ * @property {Array<companies>} state.originCompanies Original array of companies
+ * @property {Array<companies>} state.companies Copy of original array of companies for manipulations
+ * @property {number} state.companiesOnPage Number companies on page ( number of rows )
+ * @property {number} state.currentPage Current page
+ * @property {number} state.minPage Min page
+ * @property {number} state.maxPage Max page
+ * @property {string} state.currentSortField Name of field for sorting, example sort by Name
+ * @property {string} state.sortWay Asc or desc
+ *
+ */
 class TableOfCompanies extends Component {
   state = {
     originCompanies: [],
@@ -15,8 +33,7 @@ class TableOfCompanies extends Component {
     minPage: 1,
     maxPage: 1,
     currentSortField: null,
-    sortWay: null,
-    filterBy: null
+    sortWay: null
   };
   async componentDidMount() {
     let originCompanies = await getAllReadyCompanies(COMPANIES_URL, INCOME_URL);
@@ -71,26 +88,38 @@ class TableOfCompanies extends Component {
   sortBy = e => {
     let sortField = e.target.getAttribute("data-field-name");
     if (this.state.currentSortField) {
-      if (this.state.sortWay === "ASC") {
+      if (this.state.sortWay === SORT_WAY_ASC) {
         this.setState({
           ...this.state,
-          companies: sortArrayByField(this.state.companies, sortField, "DESC"),
-          sortWay: "DESC",
+          companies: sortArrayByField(
+            this.state.companies,
+            sortField,
+            SORT_WAY_DESC
+          ),
+          sortWay: SORT_WAY_DESC,
           currentSortField: sortField
         });
       } else {
         this.setState({
           ...this.state,
-          companies: sortArrayByField(this.state.companies, sortField, "ASC"),
-          sortWay: "ASC",
+          companies: sortArrayByField(
+            this.state.companies,
+            sortField,
+            SORT_WAY_ASC
+          ),
+          sortWay: SORT_WAY_ASC,
           currentSortField: sortField
         });
       }
     } else {
       this.setState({
         ...this.state,
-        companies: sortArrayByField(this.state.companies, sortField, "ASC"),
-        sortWay: "ASC",
+        companies: sortArrayByField(
+          this.state.companies,
+          sortField,
+          SORT_WAY_ASC
+        ),
+        sortWay: SORT_WAY_ASC,
         currentSortField: sortField
       });
     }
@@ -100,7 +129,11 @@ class TableOfCompanies extends Component {
     return (
       <div className="table-of-companies">
         <TableHeader sort={this.sortBy} />
-        <TableBody state={this.state} />
+        <TableBody
+          currentPage={this.state.currentPage}
+          companiesOnPage={this.state.companiesOnPage}
+          companies={this.state.companies}
+        />
         <TableFooter
           prevPage={this.prevPage}
           maxPage={this.state.maxPage}

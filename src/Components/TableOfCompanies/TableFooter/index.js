@@ -2,8 +2,20 @@ import React from "react";
 import "./TableFooter.css";
 import PropTypes from "prop-types";
 
-export default function TableFooter(props) {
-  const { currentPage, prevPage, maxPage, nextPage, inputHandle } = props;
+/**
+ * Table footer, here we have paginatiion and filter.
+ * 
+ * @component
+ * @property {Object} props
+ * @param {number} currentPage Current page.
+ * @param {number} maxPage Max page.
+ * @param {function} prevPage Previous page.
+ * @param {function} nextPage Next page.
+ * @param {function} inputHandle Change list on input.
+ *
+ */
+function TableFooter(props) {
+  let { currentPage, maxPage, prevPage, nextPage, inputHandle } = props;
   return (
     <div className="table-footer">
       <div className="pagination-group">
@@ -32,3 +44,5 @@ TableFooter.propTypes = {
   nextPage: PropTypes.func,
   inputHandle: PropTypes.func
 };
+
+export default TableFooter;
