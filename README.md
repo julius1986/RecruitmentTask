@@ -1,6 +1,6 @@
-#Recruitment test 
+# Recruitment test 
 
-##Tasks
+## Tasks
 
 1. Fetch and display table of companies, table should have `id, name, city, total income (sum of company incomes), average income (average of company incomes), last month income (sum of last month incomes) columns.
 2. You should create your own implementation of table. Bootstrap, antD... it is not allowed.
@@ -32,3 +32,12 @@ Open your terminal(powershell), go to some directory using command "cd someFolde
 
 > If you have a problem with docs, please install global package "parcel-bundler"
 > npm i -g parcel-bundler  
+
+## Notes.
+
+In master branch I use flexbox. But you can change branch on dev, there I created a simple grid.
+For this, at first you have to install application, then write in powershell:
+
+>git checkout dev
+>npm i
+>npm run start
