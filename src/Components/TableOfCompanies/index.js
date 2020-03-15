@@ -14,6 +14,7 @@ import {
 /**
  * Main component of table.
  * @component
+ * @param {function} props.toogleLoading Function to turn off loading screen.
  * @property {Array<companies>} state.originCompanies Original array of companies
  * @property {Array<companies>} state.companies Copy of original array of companies for manipulations
  * @property {number} state.companiesOnPage Number companies on page ( number of rows )
@@ -45,6 +46,7 @@ class TableOfCompanies extends Component {
       maxPage,
       originCompanies
     });
+    this.props.toogleLoading();
   }
 
   inputHandle = e => {
@@ -127,21 +129,23 @@ class TableOfCompanies extends Component {
 
   render() {
     return (
-      <div className="table-of-companies">
-        <TableHeader sort={this.sortBy} />
-        <TableBody
-          currentPage={this.state.currentPage}
-          companiesOnPage={this.state.companiesOnPage}
-          companies={this.state.companies}
-        />
-        <TableFooter
-          prevPage={this.prevPage}
-          maxPage={this.state.maxPage}
-          currentPage={this.state.currentPage}
-          nextPage={this.nextPage}
-          inputHandle={this.inputHandle}
-        />
-      </div>
+      this.state.companies.length>0 && (
+        <div className="table-of-companies">
+          <TableHeader sort={this.sortBy} />
+          <TableBody
+            currentPage={this.state.currentPage}
+            companiesOnPage={this.state.companiesOnPage}
+            companies={this.state.companies}
+          />
+          <TableFooter
+            prevPage={this.prevPage}
+            maxPage={this.state.maxPage}
+            currentPage={this.state.currentPage}
+            nextPage={this.nextPage}
+            inputHandle={this.inputHandle}
+          />
+        </div>
+      )
     );
   }
 }
